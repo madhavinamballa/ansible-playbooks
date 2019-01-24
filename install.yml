@@ -5,7 +5,7 @@
   become_method: sudo
   vars:
    host_name: all
-   user_name: ansible
+   user_name: jenkins
   tasks:
   - name: debug module
     debug: msg= "hi dear {{ ansible_distribution }}"
