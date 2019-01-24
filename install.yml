@@ -52,7 +52,7 @@
      - debug1
   - name: create a file
     file:
-     path: /tmp/test.txt
+     path: /tmp/teeee.txt
      state: touch
      owner: jenkins
      mode: 0755
