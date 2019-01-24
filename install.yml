@@ -50,4 +50,10 @@
       msg:  "{{ hostvars[inventory_hostname].ansible_distribution }}"
     tags:
      - debug1
+  - name: create a file
+    file:
+     path: /tmp/test.txt
+     state: touch
+     owner: jenkins
+     mode: 0755
 
