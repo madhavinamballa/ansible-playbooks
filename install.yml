@@ -1,0 +1,52 @@
+---
+- hosts: "{{ host_name }}"
+  user: "{{ user_name }}"
+  sudo: yes
+  vars:
+   host_name: all
+   user_name: ansible
+  tasks:
+  - name: debug module
+    debug: msg= "hi dear {{ ansible_distribution }}"
+  - name: installing packages on ubutu machines
+    apt: 
+     name: "{{ item }}"
+     state: "{{ state }}"
+    with_items:
+      - apache2
+      - telnet
+    when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+    tags:
+     - installubuntu
+  - name: installing packages on ubutu machines
+    yum:
+      name: "{{ item }}"
+      state: "{{ state }}"
+    with_items:
+      - httpd
+      - telnet
+    when: ansible_distribution == "CentOS" or ansible_distribution == "RdHat"
+    tags:
+     - installcentos
+  - name: start service
+    service: name=apache2 state=started enabled=yes
+    when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+    tags:
+     - apacheservice
+  - name: start service
+    service: name=httpd state=started enabled=yes
+    when: ansible_distribution == "CentOS" or ansible_distribution == "RedHat"
+    tags:
+     - httpdservice
+  
+  - name:
+    debug:
+       msg: "{{ hostvars[inventory_hostname].ansible_os_family }}"
+    tags: 
+     - debug
+  - name: debug
+    debug: 
+      msg:  "{{ hostvars[inventory_hostname].ansible_distribution }}"
+    tags:
+     - debug1
+
