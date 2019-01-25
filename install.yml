@@ -56,4 +56,9 @@
      state: touch
      owner: jenkins
      mode: 0755
+  - name: replace module
+    debug:
+     msg: "hello"
+    tags:
+     - replace
 
