@@ -1,0 +1,36 @@
+---
+- hosts: local
+  become: yes
+  user: ansible
+  become_method: sudo
+  gather_facts: no
+  tasks:
+  - name: inline module
+    replace:
+     path: /home/ansible/ansible-playbooks/input.txt
+     regexp: 'hello'
+     replace: 'bye'
+    tags:
+     - replace1
+  - name: replace module
+    replace: 
+     path: /home/ansible/ansible-playbooks/team.txt
+     regexp: "{{ item }}"
+     replace: "Dog"
+    with_items:
+     - "cat"
+     - "lion"
+     - "tiger"
+    tags:
+     - replace2
+  - name: replace module3
+    replace:
+     path: "{{ item.path }}"
+     regexp: "{{ item.regexp1 }}"
+     replace: "{{ item.replace }}"
+    with_items:
+     - {path: '/home/ansible/ansible-playbooks/test1.txt', regexp1: ,'madhavi' ,replace: 'chitti'}
+     - {path: '/home/ansible/ansible-playbooks/team.txt', regexp1: ,'dog', replace: 'neha'}
+    tags:
+    - replace3 
+
