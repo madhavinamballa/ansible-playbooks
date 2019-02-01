@@ -1,0 +1,9 @@
+---
+- name: template copy
+  template:
+   src: base_httpd/templates/httpd.conf.j2
+   dest: /etc/httpd/conf/httpd.conf
+- name: copy html file
+  copy:
+   src: base_httpd/files/index.html
+   dest: /var/www/html/index.html

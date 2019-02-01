@@ -1,0 +1,4 @@
+---
+# defaults file for base_httpd
+base_httpd_listen_port: 80
+bas_httpd_loglevel: warn
